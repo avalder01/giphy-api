@@ -1,8 +1,8 @@
 
 // array of spooky topics 
-var topics = ["buffy", "pumpkin", "ghost", "vampire", "witch", "courage the cowardly dog", "sabrina the teenage witch"];
+var topics = ["Buffy", "Pumpkin", "Ghost", "Vampire", "Witch", "Courage The Cowardly Dog", "Sabrina The Teenage Witch"];
 
-// displaySpookyInfo function re-renders the HTML to display the appropriate content
+// displaySpookyInfo function re-renders the HTML to display content
 function displaySpookyInfo() {
     var spooky = $(this).attr("data-name");
     // Constructing a URL to search Giphy for various spooky gifs
@@ -15,32 +15,43 @@ function displaySpookyInfo() {
     }).then(function(response) {
         
         var results = response.data;
-
         for (var i = 0; i < results.length; i++) {
 
           if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
             var gifDiv = $("<div>");
             var rating = results[i].rating;
-            var p = $("<p>").text("Rating: " + rating);
-            var spookyImage = $("<img>");
-
-            spookyImage.attr("src", results[i].images.fixed_height.url);
-
-            gifDiv.prepend(p);
+            var pOne = $("<p>").text("Rating: " + rating);
+            var spookyImage = $("<img>").addClass("gif");
+            spookyImage.attr("src", results[i].images.fixed_width_still.url);
+            spookyImage.attr("data-still", results[i].images.fixed_width_still.url);
+            spookyImage.attr("data-animate", results[i].images.fixed_width.url);
+            spookyImage.attr("data-state", "still");
+            gifDiv.prepend(pOne);
             gifDiv.prepend(spookyImage);
-
             $("#gifsHere").prepend(gifDiv);
           }
         }
       });
   };
+  
+// click event that triggers the gifs to be static/animated when clicked 
 
+function staticAnimate() {
+    var state = $(this).attr("data-state");
+    if (state === "still") {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    } else {
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
+    }
+  };
   // Function that renders buttons
 function renderButtons() {
     $("#buttonsHere").empty();
 
     for (var i = 0; i < topics.length; i++) {
-        var button= $("<button>");
+        var button= $('<button type="button" class="btn btn-success">');
         button.addClass("topic-btn");
         button.attr("data-name", topics[i]);
         button.text(topics[i]);
@@ -56,36 +67,18 @@ function renderButtons() {
     renderButtons();
 });
 
-//  click event listener that triggers the computer to pull giphs when clicked
+//  click event listeners 
 $(document).on("click", ".topic-btn", displaySpookyInfo);
+$(document).on("click", ".gif", staticAnimate);
 
 // calls renderButtons function 
 renderButtons();
 
 
 
-// click event that triggers the gifs to be static/animated when clicked 
-// figure out how to link this with the gifs 
-// change ".gif"
-$(".gif").on("click", function() {
-    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-    var state = $(this).attr("data-state");
-    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-    // Then, set the image's data-state to animate
-    // Else set src to the data-still value
-    if (state === "still") {
-      $(this).attr("src", $(this).attr("data-animate"));
-      $(this).attr("data-state", "animate");
-    } else {
-      $(this).attr("src", $(this).attr("data-still"));
-      $(this).attr("data-state", "still");
-    }
-  });
 
 
-// To do list 
-// .make gifs static until clicked
-// .make gifs still when clicked again
+
 
 
 

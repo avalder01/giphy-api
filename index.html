@@ -3,35 +3,54 @@
 
 <head>
   <meta charset="utf-8">
-  <!-- only for reset css  -->
-  <link rel="stylesheet" href="reset.css" type="text/css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Creepster" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- might not need test later  -->
   <script type="text/javascript"></script>
 
   <title>GIPHY Database</title>
 </head>
 
 <body>
-  <!-- try doing boostrap later -->
- <header>
-   <h1>click the buttons to get a gif!</h1>
- </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron text-center" id="header">
+                <h1><img id="icon" src="assets/images/ghost (3).png" alt="ghost"> <strong>Click For Spooky Gifs!</strong> <img id="icon" src="assets/images/ghost (3).png" alt="ghost">
+                </div>
+            </div>
+      
+            <div class="col-md-12">
+                <div class="col-md-8" id="buttonsHere">
+                  <!-- buttons go here -->
+                </div>
+         
+                <div class="col-md-4">
+                    <form>
+                        <label for="topicInput"><h4>Search</h4></label>
+                        <input type="text" id="topicInput">
+                        <button id="addSpook" type="button" class="btn btn-success">Add</button>
+                      </form>
+                </div>
+      
+                <div id = "gifsHere" class= "col-md-12 well well-lg">
+                     <!-- gifs go here -->
+                </div>
+            </div> 
+        </div>
+      </div>
 
- <div id="buttonsHere"></div>
-
- <form>
-    <label for="topicInput">Add Something Spooky!</label>
-    <input type="text" id="topicInput">
-    <!-- <input id="addSpook" type="submit" value="Add"> -->
-    <!-- bootstrap button use if you can get it working -->
-    <button id="addSpook" type="button" class="btn btn-info">Add</button>
-</form>
-    
- <div id = "gifsHere" class = "well well-lg"></div>
-  
+      <footer>
+          <div class="fixed-bottom footer">
+              <div class="container-fluid">
+                <div class="text-muted text-center">
+                  <div class= "foot">
+                      Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </footer>
 </body>
 <script src="assets/javascript/app.js"></script>
 </html>
